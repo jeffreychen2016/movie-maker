@@ -1,3 +1,25 @@
 body{
   background-color: blanchedalmond;
 }
+
+.margin-top{
+  margin-top: 20px;
+}
+
+.border-bottom{
+  border-bottom: solid 2px black;
+}
+
+#budget-input,
+#set-budget-btn{
+  display: inline;
+}
+
+#budget-input{
+  width: 70%;
+}
+
+.border-around{
+  border: solid 2px black;
+  height: 80vh;
+}
