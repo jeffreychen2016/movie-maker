@@ -1,1 +1,3 @@
-console.log('Test');
+const initializer = require('./dataGateKeeper');
+
+initializer();
