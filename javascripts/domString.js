@@ -1,3 +1,5 @@
+const addElementEvent = require('./elementEvent');
+
 const printToDom = (domString,divId) => {
   document.getElementById(divId).innerHTML = domString;
 };
@@ -35,13 +37,14 @@ const elementDomString = (elementArray) => {
     for (let j = 0; j < elementData.length; j++) {
       if (elementData[j].categoryId * 1 === i) {
         elementDom +=  `<div class='col-sm-4'>`;
-        elementDom +=   `<input type='checkbox' class='element-selections' id='category-${i}-${elementData[j].id}' disabled><span>${elementData[j].name}</span>`;
+        elementDom +=   `<input type='checkbox' class='element-selections element-category-${i}' id='category-${i}-${elementData[j].id}' disabled><span>${elementData[j].name}</span>`;
         elementDom +=  `</div>`;
       };
     };
     elementDom += `</div>`;
     printToDom(elementDom,`element-holder-${i}`);
   };
+  addElementEvent();
 };
 
 module.exports = {
