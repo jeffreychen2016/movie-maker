@@ -3,6 +3,7 @@ const loadCategories = require('./xhrCategories');
 const data = require('./data');
 const buildDomString = require('./domString');
 const setBudget = require('./setBudgetEvent');
+const addElementEvent = require('./elementEvent');
 
 const whenFailToLoad = function () {
   console.log('XHR Fails~~~!');
@@ -19,6 +20,7 @@ const whenElementsLoad = function () {
   const elementsData = JSON.parse(this.responseText).elements;
   data.setElements(elementsData);
   buildDomString.elementDomString(data.getElements());
+  addElementEvent();
 };
 
 const initializer = () => {

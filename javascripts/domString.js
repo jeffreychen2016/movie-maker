@@ -1,5 +1,3 @@
-const addElementEvent = require('./elementEvent');
-
 const printToDom = (domString,divId) => {
   document.getElementById(divId).innerHTML = domString;
 };
@@ -21,7 +19,10 @@ const categoryDomString = (categoryArray) => {
     categoryDom += `</div>`;
   };
   categoryDom +=  `</div>`;
-  categoryDom +=  `<div class='col-sm-4 col-sm-offset-2 border-around'><h2 class='text-center' id='budget-amount'>$0</h2></div>`;;
+  categoryDom +=  `<div class='col-sm-4 col-sm-offset-2 border-around'>`;
+  categoryDom +=    `<h2 class='text-center' id='budget-amount'>$0</h2>`;
+  categoryDom +=    `<div id='cart-detail'></div>`;
+  categoryDom +=  `</div>`;
   categoryDom += `</div>`;
   categoryDom += `</div>`;
   printToDom(categoryDom,'category-holder');
@@ -37,17 +38,25 @@ const elementDomString = (elementArray) => {
     for (let j = 0; j < elementData.length; j++) {
       if (elementData[j].categoryId * 1 === i) {
         elementDom +=  `<div class='col-sm-4'>`;
-        elementDom +=   `<input type='checkbox' class='element-selections element-category-${i}' id='category-${i}-${elementData[j].id}' disabled><span>${elementData[j].name}</span>`;
+        elementDom +=   `<input type='checkbox' class='element-selections element-category-${i}' id='category-${i}-${elementData[j].id}' data-element-id='${elementData[j].id}' disabled><span>${elementData[j].name}</span>`;
         elementDom +=  `</div>`;
       };
     };
     elementDom += `</div>`;
     printToDom(elementDom,`element-holder-${i}`);
   };
-  addElementEvent();
+};
+
+const cartDomString = (cartArray) => {
+  let cartDom = '';
+  cartArray.forEach((element) => {
+    cartDom += `<p>${element.name}: ${element.cost}</p>`;
+  });
+  printToDom(cartDom,'cart-detail');
 };
 
 module.exports = {
   categoryDomString,
   elementDomString,
+  cartDomString,
 };

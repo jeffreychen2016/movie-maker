@@ -1,6 +1,7 @@
 let categories = [];
 let elements = [];
 let budget = 0;
+let cart = [];
 
 // const category1 = [];
 // const category2 = [];
@@ -31,6 +32,14 @@ const setBudget = (budgetInput) => {
   budget = budgetInput;
 };
 
+const getCart = () => {
+  return cart;
+};
+
+const setCart = (elementAddToCart) => {
+  cart = elementAddToCart;
+};
+
 // const classifyCategory = () => {
 //   const allCategories = document.getElementsByClassName('category');
 //   const allElements = getElements();
@@ -58,5 +67,7 @@ module.exports = {
   getElements,
   setBudget,
   getBudget,
+  setCart,
+  getCart,
   // classifyCategory,
 };
