@@ -12,8 +12,8 @@ const addElementToCart = (e) => {
       itemsSelectedArray.push({id: element.id,name: element.name, cost: element.cost,});
     };
   });
+
   data.setCart(itemsSelectedArray);
-  domString.cartDomString(data.getCart());
 };
 
 const removeElementFromCart = (e) => {
@@ -26,7 +26,6 @@ const removeElementFromCart = (e) => {
   });
 
   data.setCart(elementsInCart);
-  domString.cartDomString(data.getCart());
 };
 
 const getUniqueCategorySelected = (e) => {
@@ -42,6 +41,7 @@ const getUniqueCategorySelected = (e) => {
     removeElementFromCart(e);
   };
   const uniqueCategory = Array.from(new Set(categoriesSelectedArray));
+  data.setUniqueCategory(uniqueCategory);
   return uniqueCategory;
 };
 
@@ -53,6 +53,8 @@ const updateProgressBar = (e) => {
   const percentage = categoryCounts / allCategoriesCounts * 100;
   progressBar.style.width = `${percentage}%`;
   progressBar.innerHTML = `${percentage}%`;
+  data.setCompleteness(percentage);
+  domString.cartDomString(data.getCart(),data.getRemainingBalance(),data.getCompletenss());
 };
 
 const addElementEvent = () => {
