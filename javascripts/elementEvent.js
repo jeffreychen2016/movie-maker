@@ -1,13 +1,46 @@
+const data = require('./data');
+const domString = require('./domString');
+
 const categoriesSelectedArray = [];
+const itemsSelectedArray = [];
+
+const addElementToCart = (e) => {
+  const itemIDSelected = e.target.dataset.elementId;
+  const elementsData = data.getElements();
+  elementsData.forEach((element) => {
+    if (itemIDSelected * 1 === element.id) {
+      itemsSelectedArray.push({id: element.id,name: element.name, cost: element.cost,});
+    };
+  });
+  data.setCart(itemsSelectedArray);
+  domString.cartDomString(data.getCart());
+};
+
+const removeElementFromCart = (e) => {
+  const itemIDSelected = e.target.dataset.elementId;
+  const elementsInCart = data.getCart();
+  elementsInCart.forEach((element) => {
+    if (itemIDSelected * 1 === element.id * 1) {
+      elementsInCart.splice(elementsInCart.indexOf(element),1);
+    };
+  });
+
+  data.setCart(elementsInCart);
+  domString.cartDomString(data.getCart());
+};
 
 const getUniqueCategorySelected = (e) => {
   const categorySelected = e.target.classList[1];
   if (e.target.checked) {
     categoriesSelectedArray.push(categorySelected);
+    addElementToCart(e);
   } else {
+    // remove first occurence of category from array
+    // the progress bar increase/decrease by category, not the elements
+    // so only the unique category matters
     categoriesSelectedArray.splice(categoriesSelectedArray.indexOf(categorySelected),1);
+    removeElementFromCart(e);
   };
-
   const uniqueCategory = Array.from(new Set(categoriesSelectedArray));
   return uniqueCategory;
 };
