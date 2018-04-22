@@ -2,6 +2,8 @@ let categories = [];
 let elements = [];
 let budget = 0;
 let cart = [];
+let uniqueCategory = [];
+let completeness = 0;
 
 // const category1 = [];
 // const category2 = [];
@@ -40,6 +42,34 @@ const setCart = (elementAddToCart) => {
   cart = elementAddToCart;
 };
 
+const getRemainingBalance = () => {
+  let totalCost = 0;
+  const totalBudget = getBudget();
+  const elementsInCart = getCart();
+  elementsInCart.forEach((element) => {
+    totalCost += element.cost * 1;
+  });
+
+  const remainingBalance = totalBudget - totalCost;
+  return remainingBalance;
+};
+
+const getUniqueCategory = () => {
+  return uniqueCategory;
+};
+
+const setUniqueCategory = (uniqueCategoryArray) => {
+  uniqueCategory = uniqueCategoryArray;
+};
+
+const getCompletenss = () => {
+  return completeness;
+};
+
+const setCompleteness = (completenessPercentage) => {
+  completeness = completenessPercentage;
+};
+
 // const classifyCategory = () => {
 //   const allCategories = document.getElementsByClassName('category');
 //   const allElements = getElements();
@@ -69,5 +99,10 @@ module.exports = {
   getBudget,
   setCart,
   getCart,
+  getRemainingBalance,
+  setUniqueCategory,
+  getUniqueCategory,
+  setCompleteness,
+  getCompletenss,
   // classifyCategory,
 };

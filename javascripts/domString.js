@@ -22,6 +22,7 @@ const categoryDomString = (categoryArray) => {
   categoryDom +=  `<div class='col-sm-4 col-sm-offset-2 border-around'>`;
   categoryDom +=    `<h2 class='text-center' id='budget-amount'>$0</h2>`;
   categoryDom +=    `<div id='cart-detail'></div>`;
+  categoryDom +=    `<div id='result'></div>`;
   categoryDom +=  `</div>`;
   categoryDom += `</div>`;
   categoryDom += `</div>`;
@@ -47,12 +48,28 @@ const elementDomString = (elementArray) => {
   };
 };
 
-const cartDomString = (cartArray) => {
+const cartDomString = (cartArray,budgetLeft,completeness) => {
+  const remainingBudget = budgetLeft;
+  console.log(completeness);
   let cartDom = '';
+  const yesToMakeMovie = 'You can make the movie!';
+  const noToMakeMovie = `You can not make the movie!`;
   cartArray.forEach((element) => {
     cartDom += `<p>${element.name}: ${element.cost}</p>`;
   });
+
+  printToDom(`$${remainingBudget}`,'budget-amount');
   printToDom(cartDom,'cart-detail');
+
+  if (remainingBudget < 0 || completeness < 100) {
+    document.getElementById('result').classList.remove('yesMovie');
+    document.getElementById('result').classList.add('noMovie');
+    printToDom(noToMakeMovie,'result');
+  } else {
+    document.getElementById('result').classList.remove('noMovie');
+    document.getElementById('result').classList.add('yesMovie');
+    printToDom(yesToMakeMovie,'result');
+  };
 };
 
 module.exports = {
