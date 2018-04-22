@@ -1,5 +1,6 @@
 let categories = [];
 let elements = [];
+let budget = 0;
 
 // const category1 = [];
 // const category2 = [];
@@ -20,6 +21,14 @@ const setElements = (elementsData) => {
 
 const getElements = () => {
   return elements;
+};
+
+const getBudget = () => {
+  return budget;
+};
+
+const setBudget = (budgetInput) => {
+  budget = budgetInput;
 };
 
 // const classifyCategory = () => {
@@ -47,5 +56,7 @@ module.exports = {
   getCategories,
   setElements,
   getElements,
+  setBudget,
+  getBudget,
   // classifyCategory,
 };

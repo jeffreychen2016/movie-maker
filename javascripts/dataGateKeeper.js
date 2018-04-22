@@ -2,6 +2,7 @@ const loadElements = require('./xhrElements');
 const loadCategories = require('./xhrCategories');
 const data = require('./data');
 const buildDomString = require('./domString');
+const setBudget = require('./setBudgetEvent');
 
 const whenFailToLoad = function () {
   console.log('XHR Fails~~~!');
@@ -22,6 +23,7 @@ const whenElementsLoad = function () {
 
 const initializer = () => {
   loadCategories(whenCategoriesLoad,whenFailToLoad);
+  setBudget();
 };
 
 module.exports = initializer;
