@@ -54,6 +54,7 @@ const updateProgressBar = (e) => {
   progressBar.style.width = `${percentage}%`;
   progressBar.innerHTML = `${percentage}%`;
   data.setCompleteness(percentage);
+
   domString.cartDomString(data.getCart(),data.getRemainingBalance(),data.getCompletenss());
 };
 
