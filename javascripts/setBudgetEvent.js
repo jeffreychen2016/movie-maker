@@ -1,5 +1,6 @@
 const inputValidation = require('./inputValidation');
 const data = require('./data');
+const domString = require('./domString');
 
 const elementSelections = document.getElementsByClassName('element-selections');
 
@@ -12,8 +13,21 @@ const unlockInputField = (inputField) => {
   inputField.disabled = false;
 };
 
-const writeBudgetToList = (budget) => {
-  document.getElementById('budget-amount').innerHTML = `$${budget}`;
+const writeBudgetToList = (btnStatus) => {
+  const budget = data.getRemainingBalance();
+
+  if (btnStatus) {
+    document.getElementById('budget-amount').innerHTML = `$${budget}`;
+    // if nothing has been selected yet, then do not display any message
+    if (data.getUniqueCategory().length < 1) {
+      document.getElementById('result').innerHTML = '';
+    } else {
+      domString.printConclusion(data.getRemainingBalance(),data.getCompletenss());
+    };
+  } else {
+    document.getElementById('budget-amount').innerHTML = `$0`;
+    document.getElementById('result').innerHTML = '';
+  };
 };
 
 const enableElementSelections = (elementSelections) => {
@@ -32,14 +46,15 @@ const changeToChangeBudget = (e,budget) => {
   const inputField = document.getElementById('budget-input');
 
   if (e.target.innerHTML === 'Set Budget') {
+    // status true when "set budget", false when "change budget"
     e.target.innerHTML = 'Change Budget';
     lockInputField(inputField);
-    writeBudgetToList(budget);
+    writeBudgetToList(true);
     enableElementSelections(elementSelections);
   } else {
     e.target.innerHTML = 'Set Budget';
     unlockInputField(inputField);
-    writeBudgetToList('0');
+    writeBudgetToList(false);
     disableElementSelections(elementSelections);
   };
 };

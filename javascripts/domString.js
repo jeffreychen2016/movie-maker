@@ -48,20 +48,11 @@ const elementDomString = (elementArray) => {
   };
 };
 
-const cartDomString = (cartArray,budgetLeft,completeness) => {
-  const remainingBudget = budgetLeft;
-  console.log(completeness);
-  let cartDom = '';
+const printConclusion = (budgetLeft,completeness) => {
   const yesToMakeMovie = 'You can make the movie!';
   const noToMakeMovie = `You can not make the movie!`;
-  cartArray.forEach((element) => {
-    cartDom += `<p>${element.name}: ${element.cost}</p>`;
-  });
 
-  printToDom(`$${remainingBudget}`,'budget-amount');
-  printToDom(cartDom,'cart-detail');
-
-  if (remainingBudget < 0 || completeness < 100) {
+  if (budgetLeft < 0 || completeness < 100) {
     document.getElementById('result').classList.remove('yesMovie');
     document.getElementById('result').classList.add('noMovie');
     printToDom(noToMakeMovie,'result');
@@ -72,8 +63,20 @@ const cartDomString = (cartArray,budgetLeft,completeness) => {
   };
 };
 
+const cartDomString = (cartArray,budgetLeft,completeness) => {
+  let cartDom = '';
+  cartArray.forEach((element) => {
+    cartDom += `<p>${element.name}: ${element.cost}</p>`;
+  });
+
+  printToDom(`$${budgetLeft}`,'budget-amount');
+  printToDom(cartDom,'cart-detail');
+  printConclusion(budgetLeft,completeness);
+};
+
 module.exports = {
   categoryDomString,
   elementDomString,
   cartDomString,
+  printConclusion,
 };
